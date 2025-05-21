@@ -1,0 +1,156 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    background-color: #f2f6fa;
+    margin: 0;
+    padding: 0;
+}
+
+#filter, #sort {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+}
+
+#filter label {
+    display: inline-block;
+    width: 120px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#filter input[type="text"],
+#filter input[type="number"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccd5e0;
+    border-radius: 8px;
+    background-color: #f9fbfd;
+    color: #000;
+    transition: border-color 0.2s ease;
+}
+
+#filter input[type="text"]:focus,
+#filter input[type="number"]:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+#filter input[type="button"] {
+    padding: 10px 20px;
+    background-color: #34C759;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#filter input[type="button"]:hover {
+    background-color: #28a745;
+}
+
+#sort p:first-of-type {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+#sort p {
+    margin: 12px 0;
+    color: #444;
+}
+
+#sort select {
+    padding: 10px;
+    border: 1px solid #ccd5e0;
+    border-radius: 8px;
+    background-color: #f9fbfd;
+    font-size: 14px;
+    color: #000;
+    transition: border-color 0.2s ease;
+}
+
+#sort select:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+#sort input[type="checkbox"] {
+    margin-left: 10px;
+    transform: scale(1.2);
+}
+
+#sort input[type="button"] {
+    padding: 10px 20px;
+    background-color: #4A90E2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#sort input[type="button"]:hover {
+    background-color: #357ABD;
+}
+
+#sort input[type="button"][value="Сбросить сортировку"] {
+    background-color: #FFA500;
+    color: #fff;
+}
+
+#sort input[type="button"][value="Сбросить сортировку"]:hover {
+    background-color: #e69500;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px auto;
+    max-width: 1000px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+th {
+    background-color: #e8eff7;
+    color: #333;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+td {
+    padding: 12px;
+    border-top: 1px solid #e5e5e5;
+    color: #444;
+}
+
+tr:hover {
+    background-color: #f1f7fd;
+}
+
+tr:nth-child(even) {
+    background-color: #fbfdff;
+}
+
+td:first-child, th:first-child {
+    padding-left: 20px;
+}
+
+td:last-child, th:last-child {
+    padding-right: 20px;
+}
