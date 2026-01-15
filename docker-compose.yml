@@ -1,0 +1,10 @@
+services:
+  superstore-db:
+    image: postgres:17
+    container_name: superstore-db
+    environment:
+      POSTGRES_DB: superstore_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 11111:5432

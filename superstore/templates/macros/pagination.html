@@ -1,0 +1,13 @@
+{% macro render_pagination(page_obj, param_name) %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{{ param_name }}={{ page_obj.number - 1 }}">⬅ Prev</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+        <a href="?{{ param_name }}={{ page_obj.number + 1 }}">Next ➡</a>
+    {% endif %}
+</div>
+{% endmacro %}

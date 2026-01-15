@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superstore Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Superstore Dashboard</h1>
+
+    {% import "macros/tables.html" as tables %}
+    {% import "macros/pagination.html" as pager %}
+
+    {% for name, table in tables_data.items() %}
+        {{ tables.render_table(name|capitalize, table.headers, table.rows) }}
+        {{ pager.render_pagination(table.page_obj, name ~ "_page") }}
+        <hr>
+    {% endfor %}
+
+    <h2>Statistics</h2>
+    {{ tables.render_table("Orders by Country", ["Country", "Orders Count"], orders_by_country) }}
+    {{ tables.render_table("Profit by Country", ["Country", "Total Profit"], profit_by_country) }}
+    {{ tables.render_table("Sales by Customer", ["Customer", "Total Sales"], sales_by_customer.object_list) }}
+    {{ pager.render_pagination(sales_by_customer, "sales_page") }}
+</body>
+</html>
