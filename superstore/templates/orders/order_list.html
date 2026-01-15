@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<h1>Orders List</h1>
+<a href="{{ url('order_create') }}">Add Order</a>
+<a href="{{ url('index') }}">Dashboard</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Order Date</th>
+            <th>Ship Date</th>
+            <th>Ship Mode</th>
+            <th>Products</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer.customer_name }}</td>
+                <td>{{ order.order_date }}</td>
+                <td>{{ order.ship_date }}</td>
+                <td>{{ order.ship_mode }}</td>
+
+                <td>
+                    {% for product in order.products.all() %}
+                        {{ product.product_name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+
+                <td>
+                    <a href="{{ url('order_update', order.id) }}">Edit</a> |
+                    <a href="{{ url('order_delete', order.id) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

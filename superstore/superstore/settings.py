@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'orders',
     'data_parser',
+    'django_select2'
 ]
 
 MIDDLEWARE = [
@@ -64,15 +65,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.csrf'
             ],
         },
     },
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': False,
-        'OPTIONS': {
-            'environment': 'superstore.jinja2.environment',
+        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "environment": "superstore.jinja2.environment",
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.template.context_processors.csrf",
+            ],
         },
     }
 ]
@@ -110,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    }
 ]
 
 

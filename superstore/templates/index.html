@@ -3,6 +3,7 @@
 <head>
     <title>Superstore Dashboard</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+
 </head>
 <body>
     <h1>Superstore Dashboard</h1>
@@ -15,6 +16,12 @@
         {{ pager.render_pagination(table.page_obj, name ~ "_page") }}
         <hr>
     {% endfor %}
+
+    <a href="{{ url('orders_list') }}">
+    <h2>Create / Edit / Delete Orders</h2>
+    </a>
+    
+    
 
     <h2>Statistics</h2>
     {{ tables.render_table("Orders by Country", ["Country", "Orders Count"], orders_by_country) }}

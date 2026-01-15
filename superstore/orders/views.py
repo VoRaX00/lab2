@@ -2,8 +2,58 @@ from django.shortcuts import render
 from django.db.models import Count, Sum
 from django.core.paginator import Paginator
 from orders.models import Country, State, City, Customer, Product, Order, ProductOrder
-
+from orders.forms import OrderForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.middleware.csrf import get_token
 PAGE_SIZE = 10
+
+def orders_list(request):
+    orders = Order.objects.select_related('customer').all().order_by('order_date', 'id')
+    return render(request, 'orders/order_list.html', {'orders': orders})
+
+def order_create(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            order.products.set(form.cleaned_data["products"])
+            return redirect("orders_list")
+    else:
+        form = OrderForm()
+    return render(request, "orders/order_form.html", {
+        "form": form, 
+        "mode": "create", 
+        'title': 'Create Order',
+        'csrf_token': get_token(request)}
+    )
+
+def order_update(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    if request.method == "POST":
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            order = form.save()
+            order.products.set(form.cleaned_data["products"])
+            return redirect("orders_list")
+    else:
+        form = OrderForm(instance=order)
+    return render(request, 'orders/order_form.html', {
+        'form': form, 
+        'title': 'Edit Order',
+        'csrf_token': get_token(request)
+    })
+
+def order_delete(request, pk):
+    order = get_object_or_404(Order, id=pk)
+    if request.method == 'POST':
+        order.delete()
+        return redirect('orders_list')
+
+    return render(request, 'orders/order_confirm_delete.html', {
+        'order': order,
+        'csrf_token': get_token(request)
+    })
+
 
 def safe_page_number(param):
     try:
@@ -67,6 +117,7 @@ def index(request):
         'orders_by_country': orders_by_country,
         'profit_by_country': profit_by_country,
         'sales_by_customer': sales_page,
+        'csrf_token': get_token(request)
     }
 
     return render(request, 'index.html', context)

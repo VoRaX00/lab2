@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Superstore Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>{{ title }}</h1>
+
+    <form method="post">
+        {{ form.as_p() }}
+        {{ csrf_field(csrf_token) }}
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="{{ url('orders_list') }}">Back to orders</a>
+</body>
+</html>

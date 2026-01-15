@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 class Country(models.Model):
     country_name = models.CharField(max_length=100)
@@ -58,15 +59,27 @@ class Product(models.Model):
         db_table = 'products'
 
 class Order(models.Model):
+
+    class ShipMode(models.TextChoices):
+        FIRST_CLASS = 'First Class'
+        SECOND_CLASS = 'Second Class'
+        STANDARD_CLASS = 'Standard Class'
+        SAME_DAY = 'Same Day'
+
     id = models.CharField(max_length=50, primary_key=True)
     order_date = models.DateField()
     ship_date = models.DateField()
-    ship_mode = models.CharField(max_length=100)
+    ship_mode = models.CharField(max_length=20, choices=ShipMode.choices)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='orders')
     products = models.ManyToManyField(Product, through='ProductOrder')
 
     def __str__(self):
         return f"Order {self.id} - {self.customer.customer_name}"
+    
+    def save(self, *args, **kwargs):
+        if not self.id or not self.id.strip():
+            self.id = str(uuid.uuid4())
+        super().save(*args, **kwargs)
     
     class Meta:
         db_table = 'orders'
